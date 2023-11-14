@@ -1,0 +1,36 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.002.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "semana1", "semana1\semana1.csproj", "{515EF440-A3D3-4501-8999-48CBC995963F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "semana2", "semana2", "{0DF46041-E327-49A2-ACF3-24CE4C47B675}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AtividadeSem2", "semana2\AtividadeSem2\AtividadeSem2.csproj", "{073E080C-E134-4660-99C6-5845050A7777}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{515EF440-A3D3-4501-8999-48CBC995963F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{515EF440-A3D3-4501-8999-48CBC995963F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{515EF440-A3D3-4501-8999-48CBC995963F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{515EF440-A3D3-4501-8999-48CBC995963F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{073E080C-E134-4660-99C6-5845050A7777}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{073E080C-E134-4660-99C6-5845050A7777}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{073E080C-E134-4660-99C6-5845050A7777}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{073E080C-E134-4660-99C6-5845050A7777}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {88880318-3604-4C73-884B-262C103896CF}
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{073E080C-E134-4660-99C6-5845050A7777} = {0DF46041-E327-49A2-ACF3-24CE4C47B675}
+	EndGlobalSection
+EndGlobal
