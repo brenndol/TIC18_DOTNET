@@ -6,25 +6,25 @@ class Program
 {
     class Task
     {
-        public string Titulo 
+        public string Titulo
         { 
-            get {return titulo; } 
-            set {titulo = value; }
+            get {return Titulo; } 
+            set {Titulo = value; }
         }
         public string Descricao 
         {
-            get {return descricao;}
-            set {descricao = value} 
+            get {return Descricao;}
+            set {Descricao = value;} 
         }
         public DateTime DataVencimento 
         { 
-            get {return dataVencimento;}
+            get {return DataVencimento;}
             set {DataVencimento = value;}
         }
         public bool Concluida 
         { 
             get {return Concluida;}
-            set {Concluida = value} 
+            set {Concluida = value;} 
         }
     }
 
@@ -74,7 +74,7 @@ class Program
                     ExibirEstatistica();
                     break;
                 case "9":
-                    Ambiente.Exit(0);
+                    Environment.Exit(0);
                     break;
                 default:
                     Console.WriteLine("Opção inválida. Tente novamente.");
@@ -94,7 +94,7 @@ class Program
         Console.Write("Data de Vencimento (yyyy-MM-dd): ");
         DateTime dataVencimento = DateTime.Parse(Console.ReadLine());
 
-        tasks.Add(new Task { Titulo = titulo, Descricao = descricao, DataTime = dataVencimento });
+        tasks.Add(new Task { Titulo = titulo, Descricao = descricao, DataVencimento = dataVencimento });
         Console.WriteLine("Tarefa criada com sucesso!");
     }
 
@@ -103,7 +103,7 @@ class Program
         Console.WriteLine("Lista de Tarefas:");
         foreach (var task in tasks)
         {
-            Console.WriteLine($"Título: {task.Titulo}, Descrição: {task.Descricao}, Data de Vencimento: {task.DateTime.ToString("dd-mm-yyyy")}, Concluída: {task.IsCompleted}");
+            Console.WriteLine($"Título: {task.Titulo}, Descrição: {task.Descricao}, Data de Vencimento: {task.DataVencimento.ToString("dd-mm-yyyy")}, Concluída: {task.Concluida}");
         }
     }
 
@@ -112,11 +112,11 @@ class Program
         Console.Write("Digite o título da tarefa concluída: ");
         string titulo = Console.ReadLine();
 
-        Task task = tasks.Find(t => t.Titulo.Equals(titulo, StringComparacao.OrdinalIgnoreCase));
+        Task task = tasks.Find(t => t.Titulo.Equals(titulo, StringComparison.OrdinalIgnoreCase));
 
         if (task != null)
         {
-            task.IsCompleted = true;
+            task.Concluida = true;
             Console.WriteLine("Tarefa marcada como concluída!");
         }
         else
@@ -127,10 +127,10 @@ class Program
 
     static void ListarTarefaPendente()
     {
-        var pendenciaTarefa = tasks.Where(t => !t.IsCompleted).ToList();
+        var pendenciaTarefa = tasks.Where(t => !t.Concluida).ToList();
 
         Console.WriteLine("Lista de Tarefas Pendentes:");
-        foreach (var task in pendingTasks)
+        foreach (var task in pendenciaTarefa)
         {
             Console.WriteLine($"Título: {task.Titulo}, Descrição: {task.Descricao}, Data de Vencimento: {task.DataVencimento.ToString("dd-mm-yyyy")}");
         }
@@ -138,7 +138,7 @@ class Program
 
     static void ListarTarefaConcluida()
     {
-        var completaTarefa = tasks.Where(t => t.IsCompleted).ToList();
+        var completaTarefa = tasks.Where(t => t.Concluida).ToList();
 
         Console.WriteLine("Lista de Tarefas Concluídas:");
         foreach (var task in completaTarefa)
@@ -152,7 +152,7 @@ class Program
         Console.Write("Digite o título da tarefa a ser excluída: ");
         string titulo = Console.ReadLine();
 
-        Task task = tasks.Find(t => t.Titulo.Equals(titulo, StringComparacao.OrdinalIgnoreCase));
+        Task task = tasks.Find(t => t.Titulo.Equals(titulo, StringComparison.OrdinalIgnoreCase));
 
         if (task != null)
         {
@@ -170,28 +170,28 @@ class Program
         Console.Write("Digite a palavra-chave: ");
         string palavrachave = Console.ReadLine();
 
-        var resultado = tasks.Where(t => t.Titulo.Contains(palavrachave, StringComparacao.OrdinalIgnoreCase) || t.Descricao.Contains(palavrachave, StringComparacao.OrdinalIgnoreCase)).ToList();
+        var resultado = tasks.Where(t => t.Titulo.Contains(palavrachave, StringComparison.OrdinalIgnoreCase) || t.Descricao.Contains(palavrachave, StringComparison.OrdinalIgnoreCase)).ToList();
 
         Console.WriteLine("Resultado da Pesquisa:");
         foreach (var task in resultado)
         {
-            Console.WriteLine($"Título: {task.Titulo}, Descrição: {task.Descricao}, Data de Vencimento: {task.DataVencimento.ToString("dd-mm-yyyy")}, Concluída: {task.IsCompleted}");
+            Console.WriteLine($"Título: {task.Titulo}, Descrição: {task.Descricao}, Data de Vencimento: {task.DataVencimento.ToString("dd-mm-yyyy")}, Concluída: {task.Concluida}");
         }
     }
 
     static void ExibirEstatistica()
     {
         int totalTarefa = tasks.Count;
-        int completaTarefa = tasks.Count(t => t.IsCompleted);
-        int pendenciaTarefa = totalTasks - completaTarefa;
+        int completaTarefa = tasks.Count(t => t.Concluida);
+        int pendenciaTarefa = totalTarefa - completaTarefa;
 
-        var velhaTarefa = tasks.OrdenarPor(t => t.DateTime).FirstOrDefault();
-        var novaTarefa = tasks.OrdenarPorDescendente(t => t.DateTime).FirstOrDefault();
+        var velhaTarefa = tasks.OrderBy(t => t.DataVencimento).FirstOrDefault();
+        var novaTarefa = tasks.OrderByDescending(t => t.DataVencimento).FirstOrDefault();
 
         Console.WriteLine($"Número total de tarefas: {totalTarefa}");
         Console.WriteLine($"Número de tarefas concluídas: {completaTarefa}");
         Console.WriteLine($"Número de tarefas pendentes: {pendenciaTarefa}");
-        Console.WriteLine($"Tarefa mais antiga: {oldestTask?.Titulo} - Data de Vencimento: {velhaTarefa?.DateTime.ToString("dd-mm-yyyy")}");
-        Console.WriteLine($"Tarefa mais recente: {newestTask?.Titulo} - Data de Vencimento: {novaTarefa?.DateTime.ToString("dd-mm-yyyy")}");
+        Console.WriteLine($"Tarefa mais antiga: {velhaTarefa?.Titulo} - Data de Vencimento: {velhaTarefa?.DataVencimento.ToString("dd-mm-yyyy")}");
+        Console.WriteLine($"Tarefa mais recente: {novaTarefa?.Titulo} - Data de Vencimento: {novaTarefa?.DataVencimento.ToString("dd-mm-yyyy")}");
     }
 }
